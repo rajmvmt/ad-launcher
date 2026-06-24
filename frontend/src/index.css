@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 15px;
+
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #FFFAF0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+/* MVMT Printer Theme Overrides */
+@layer base {
+  body {
+    @apply text-amber-900 bg-[#FFFAF0];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .dark body,
+  body.dark,
+  .dark {
+    @apply text-gray-100 bg-gray-950;
+    background-image: none;
+  }
+
+  /* Dark mode: auto-style common elements (raw CSS to avoid @apply circular deps) */
+  .dark .bg-white { background-color: rgb(17 24 39) !important; } /* gray-900 */
+  .dark .border-gray-200 { border-color: rgb(55 65 81) !important; } /* gray-700 */
+  .dark .border-gray-100 { border-color: rgb(31 41 55) !important; } /* gray-800 */
+  .dark .bg-gray-50 { background-color: rgb(31 41 55) !important; } /* gray-800 */
+  .dark .text-gray-900 { color: rgb(243 244 246) !important; } /* gray-100 */
+  .dark .text-gray-800 { color: rgb(229 231 235) !important; } /* gray-200 */
+  .dark .text-gray-700 { color: rgb(209 213 219) !important; } /* gray-300 */
+  .dark .text-gray-600 { color: rgb(156 163 175) !important; } /* gray-400 */
+  .dark .text-gray-500 { color: rgb(156 163 175) !important; } /* gray-400 */
+  .dark .text-gray-400 { color: rgb(107 114 128) !important; } /* gray-500 */
+  .dark .bg-gray-100 { background-color: rgb(31 41 55) !important; } /* gray-800 */
+  .dark .hover\:bg-gray-50:hover { background-color: rgb(31 41 55) !important; } /* gray-800 */
+  .dark .hover\:bg-gray-100:hover { background-color: rgb(55 65 81) !important; } /* gray-700 */
+  .dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(31 41 55) !important; } /* gray-800 */
+  .dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color: rgb(55 65 81) !important; } /* gray-700 */
+  .dark .shadow-sm { --tw-shadow-color: rgb(17 24 39 / 0.5) !important; }
+
+  /* Dark mode: form elements */
+  .dark select,
+  .dark input[type="text"],
+  .dark input[type="email"],
+  .dark input[type="password"],
+  .dark input[type="number"],
+  .dark input[type="date"],
+  .dark input[type="url"],
+  .dark textarea {
+    @apply bg-gray-800 border-gray-600 text-gray-100 placeholder-gray-500;
+  }
+
+  /* Override default focus rings to amber */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-amber-500 ring-offset-2;
+  }
+
+  .dark *:focus-visible {
+    @apply ring-offset-gray-900;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFBEB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D97706;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B45309;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Toast Animations */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}

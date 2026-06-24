@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Cleaned by MVMT Printer - tracking scripts removed -->
+  <script type="text/javascript" src="//tracking.thebuzzygossip.com/track.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage Relief Check | See If You Qualify</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231a3a6b'/><polygon points='32,10 8,32 16,32 16,54 30,54 30,40 34,40 34,54 48,54 48,32 56,32' fill='%23e8c03a'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ─── Layout ─── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── Breaking News Bar ─── */
+    .breaking-bar {
+      background: #b22222;
+      color: #fff;
+      text-align: center;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px 20px;
+      letter-spacing: 0.5px;
+    }
+    .breaking-bar span {
+      background: #fff;
+      color: #b22222;
+      padding: 1px 6px;
+      margin-right: 8px;
+      font-size: 11px;
+      border-radius: 2px;
+    }
+
+    /* ─── Masthead ─── */
+    .masthead {
+      background: #fff;
+      border-bottom: 3px solid #1a3a6b;
+      padding: 12px 20px;
+      text-align: center;
+    }
+    .masthead .pub-name {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .masthead .pub-title {
+      font-size: 26px;
+      font-weight: bold;
+      color: #1a3a6b;
+      letter-spacing: 1px;
+    }
+    .masthead .pub-date {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    /* ─── Hero Section ─── */
+    .hero {
+      background: linear-gradient(135deg, #1a3a6b 0%, #0d2347 100%);
+      color: #fff;
+      padding: 50px 20px 40px;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      display: inline-block;
+      background: #e8c03a;
+      color: #1a1a1a;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 42px);
+      line-height: 1.25;
+      font-weight: bold;
+      margin-bottom: 18px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 em {
+      color: #e8c03a;
+      font-style: normal;
+    }
+    .hero .subhead {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: #c8d8f0;
+      max-width: 580px;
+      margin: 0 auto 30px;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+
+    /* ─── Buttons ─── */
+    .btn-primary {
+      display: inline-block;
+      background: #2ecc40;
+      color: #fff;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      transition: background 0.2s, transform 0.1s;
+      text-align: center;
+    }
+    .btn-primary:hover { background: #27ae38; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-secondary {
+      display: inline-block;
+      background: #e8c03a;
+      color: #1a1a1a;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 17px;
+      font-weight: bold;
+      padding: 16px 36px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #d4ac28; }
+    .btn-center { text-align: center; margin: 28px 0; }
+    .btn-note {
+      display: block;
+      text-align: center;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 13px;
+      color: #888;
+      margin-top: 8px;
+    }
+
+    /* ─── Trust Strip ─── */
+    .trust-strip {
+      background: #fff;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 14px 20px;
+    }
+    .trust-strip-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px 40px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 13px;
+      color: #444;
+      font-weight: bold;
+    }
+    .trust-icon { font-size: 16px; }
+
+    /* ─── Article Body ─── */
+    .article-section {
+      background: #fff;
+      padding: 40px 20px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .article-section .container p {
+      margin-bottom: 18px;
+      font-size: 17px;
+      color: #2a2a2a;
+    }
+    .article-section .container p strong {
+      color: #1a3a6b;
+    }
+    .article-section .container h2 {
+      font-size: clamp(22px, 4vw, 30px);
+      color: #1a3a6b;
+      margin-bottom: 20px;
+      line-height: 1.3;
+      border-left: 5px solid #e8c03a;
+      padding-left: 16px;
+    }
+    .article-section .container h3 {
+      font-size: 20px;
+      color: #1a3a6b;
+      margin-bottom: 14px;
+    }
+
+    /* ─── Problem Section ─── */
+    .problem-section {
+      background: #fdf6ec;
+      border-left: none;
+      border-right: none;
+    }
+
+    /* ─── Highlight Box ─── */
+    .highlight-box {
+      background: #1a3a6b;
+      color: #fff;
+      border-radius: 8px;
+      padding: 28px 28px;
+      margin: 28px 0;
+    }
+    .highlight-box h3 {
+      color: #e8c03a !important;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    .highlight-box p {
+      color: #dce8ff !important;
+      font-size: 16px !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ─── Benefits List ─── */
+    .benefits-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .benefits-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 17px;
+    }
+    .benefits-list li:last-child { border-bottom: none; }
+    .benefits-list .check {
+      color: #2ecc40;
+      font-size: 20px;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* ─── Stats Row ─── */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-card {
+      flex: 1;
+      min-width: 160px;
+      background: #f0f5ff;
+      border: 1px solid #c5d5ef;
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .stat-card .stat-num {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1a3a6b;
+      line-height: 1.1;
+    }
+    .stat-card .stat-label {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* ─── Testimonials ─── */
+    .testimonials-section {
+      background: #f9f9f9;
+      overflow: hidden;
+    }
+
+    /* ── Slider Track ── */
+    .testimonial-slider-wrap {
+      position: relative;
+      overflow: hidden;
+      margin: 28px 0;
+    }
+    /* Fade edges */
+    .testimonial-slider-wrap::before,
+    .testimonial-slider-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .testimonial-slider-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, #f9f9f9, transparent);
+    }
+    .testimonial-slider-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, #f9f9f9, transparent);
+    }
+
+    .testimonial-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: infiniteScroll 28s linear infinite;
+    }
+    .testimonial-track:hover { animation-play-state: paused; }
+
+    @keyframes infiniteScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 28px 26px 22px;
+      position: relative;
+      width: 320px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-size: 64px;
+      color: #e8c03a;
+      position: absolute;
+      top: -8px;
+      left: 18px;
+      line-height: 1;
+      font-family: 'Open Sans', Arial, sans-serif;
+    }
+    .testimonial-card .quote {
+      font-style: italic;
+      font-size: 15px;
+      color: #333;
+      padding-top: 20px;
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+    .testimonial-card .author {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 13px;
+      color: #777;
+      font-weight: bold;
+    }
+    .testimonial-card .stars {
+      color: #f5a623;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    /* ── Desktop: static 4-card grid, no slider ── */
+    @media (min-width: 900px) {
+      .testimonials-section { overflow: visible; }
+      .testimonial-slider-wrap {
+        overflow: visible;
+        margin: 28px auto;
+        max-width: 1200px;
+        padding: 0 20px;
+      }
+      .testimonial-slider-wrap::before,
+      .testimonial-slider-wrap::after { display: none; }
+      .testimonial-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        width: auto;
+        animation: none;
+        transform: none !important;
+      }
+      .testimonial-card {
+        width: auto;
+        flex-shrink: unset;
+      }
+      /* Show only first 4 cards */
+      .testimonial-track .testimonial-card:nth-child(n+5) { display: none; }
+    }
+
+    /* ─── Quiz Section ─── */
+    .quiz-section {
+      background: linear-gradient(135deg, #0d2347 0%, #1a3a6b 100%);
+      padding: 50px 20px;
+    }
+    .quiz-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 36px 32px;
+      max-width: 620px;
+      margin: 0 auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .quiz-box h2 {
+      font-size: clamp(20px, 3.5vw, 26px);
+      color: #1a3a6b;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .quiz-box .quiz-sub {
+      text-align: center;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    /* Progress Bar */
+    .progress-wrap {
+      background: #e0e8f5;
+      border-radius: 99px;
+      height: 8px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, #2ecc40, #1aad32);
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    /* Quiz Steps */
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+    .quiz-step h3 {
+      font-size: 19px;
+      color: #1a3a6b;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 2px solid #d0d8e8;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 15px;
+      color: #222;
+      background: #fff;
+      text-align: left;
+    }
+    .quiz-option:hover {
+      border-color: #1a3a6b;
+      background: #f0f5ff;
+    }
+    .quiz-option .opt-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    /* Lead Form Step */
+    .lead-form { display: flex; flex-direction: column; gap: 14px; }
+    .lead-form input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #d0d8e8;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Open Sans', Arial, sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .lead-form input:focus { border-color: #1a3a6b; }
+    .lead-form .form-note {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .lead-form .submit-btn {
+      background: #2ecc40;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: 'Open Sans', Arial, sans-serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .lead-form .submit-btn:hover { background: #27ae38; }
+
+    /* ─── Urgency Bar ─── */
+    .urgency-section {
+      background: #b22222;
+      color: #fff;
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .urgency-section h2 {
+      font-size: clamp(20px, 3.5vw, 28px);
+      margin-bottom: 10px;
+    }
+    .urgency-section p {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 15px;
+      color: #ffd0d0;
+      margin-bottom: 22px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Final CTA ─── */
+    .final-cta {
+      background: #1a3a6b;
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .final-cta h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      color: #e8c03a;
+      margin-bottom: 14px;
+    }
+    .final-cta p {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 16px;
+      color: #c8d8f0;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+
+    /* ─── Disclaimer / Footer ─── */
+    .disclaimer {
+      background: #2a2a2a;
+      color: #999;
+      padding: 30px 20px;
+    }
+    .disclaimer .container p {
+      font-family: 'Open Sans', Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+    .disclaimer .container p:last-child { margin-bottom: 0; }
+    .disclaimer a { color: #aaa; text-decoration: underline; }
+    .disclaimer hr { border: none; border-top: 1px solid #444; margin: 16px 0; }
+    .disclaimer .footer-links { text-align: center; }
+    .disclaimer .container p.footer-copyright { text-align: center; }
+
+    /* ─── Eligibility Age Check ─── */
+    .eligibility-check-section {
+      background: #fff;
+      padding: 36px 20px;
+      text-align: center;
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .elig-label {
+      display: inline-block;
+      background: #1a3a6b;
+      color: #e8c03a;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 3px;
+      margin-bottom: 14px;
+    }
+    .elig-sub {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+    }
+    .age-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .age-btn {
+      display: block;
+      background: #1a3a6b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 12px;
+      border-radius: 8px;
+      text-align: center;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    .age-btn:hover { background: #e8c03a; color: #1a1a1a; transform: translateY(-2px); }
+    @media (min-width: 600px) {
+      .age-btn-grid {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 760px;
+      }
+    }
+
+    /* ─── Divider ─── */
+    .section-divider {
+      border: none;
+      border-top: 2px solid #e0e0e0;
+      margin: 0;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      .quiz-box { padding: 24px 18px; }
+      .stats-row { flex-direction: column; }
+      .trust-strip-inner { gap: 12px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     BREAKING NEWS BAR
+════════════════════════════════════════ -->
+<div class="breaking-bar">
+  <span>LATEST NEWS</span> 2026 UPDATE: Federal Emergency Cashout Relief Program Now Open For Eligible U.S. Homeowners
+</div>
+
+<!-- ═══════════════════════════════════════
+     MASTHEAD
+════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     HERO SECTION
+════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">&#127981; 2026 UPDATE TO GOV CASHOUT MORTGAGE PROGRAM</div>
+
+    <h1>Federal Emergency Cashout Relief Program Is Giving American Homeowners <em>Up To $185,000 Within Minutes Of Applying</em></h1>
+
+    <div style="margin:24px 0 28px;">
+      <img src="images/trumpcheck.jpg" alt="Federal Emergency Cashout Relief — $185,000 U.S. Treasury check" style="width:100%; max-width:560px; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.3);" />
+    </div>
+
+    <p class="subhead">
+      Endorsed by Federal Housing and Backed by U.S. Treasury — this program is giving eligible homeowners a Home Equity Stimulus of up to $185,000 to survive inflation and pay off their expenses. There is <strong>NO COST</strong> to see how much your home qualifies for.
+    </p>
+
+    <a href="https://tracking.thebuzzygossip.com/click" class="btn-primary">&#9989; Check If You Qualify For Up To $185,000</a>
+    <span class="btn-note">It Only Takes 2 Minutes &nbsp;|&nbsp; NO Obligations</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUST STRIP
+════════════════════════════════════════ -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item"><span class="trust-icon">&#127981;</span> Authorized By Congress</div>
+    <div class="trust-item"><span class="trust-icon">&#9989;</span> Backed By U.S. Treasury</div>
+    <div class="trust-item"><span class="trust-icon">&#128200;</span> Up To $185,000 Payout</div>
+    <div class="trust-item"><span class="trust-icon">&#128274;</span> 100% Free — No Obligations</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     ELIGIBILITY AGE CHECK
+════════════════════════════════════════ -->
+<div class="eligibility-check-section" id="eligibility">
+  <div class="container">
+    <div class="elig-label">OFFICIAL ELIGIBILITY CHECK</div>
+    <p class="elig-sub">Select Your Age To Check If You Qualify For Up To $185,000:</p>
+    <div class="age-btn-grid">
+      <a href="https://tracking.thebuzzygossip.com/click" class="age-btn">35–45 Years</a>
+      <a href="https://tracking.thebuzzygossip.com/click" class="age-btn">46–55 Years</a>
+      <a href="https://tracking.thebuzzygossip.com/click" class="age-btn">56–65 Years</a>
+      <a href="https://tracking.thebuzzygossip.com/click" class="age-btn">66+ Years</a>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════
+     URGENCY SECTION
+════════════════════════════════════════ -->
+<section class="urgency-section">
+  <div class="container">
+    <h2>&#9201; Limited-Time Eligibility — Funds Are Being Allocated Now</h2>
+    <p>
+      Congress has allocated <strong>$50 Billion nationwide</strong> for this Federal Emergency Relief program — but funds in each area are limited. Once your region's allocation is claimed, the window closes.
+    </p>
+    <p>
+      Thousands of homeowners are checking their eligibility right now. <strong>Don't wait until it's too late.</strong> Select your age below and find out if you qualify for up to $185,000 today.
+    </p>
+    <a href="https://tracking.thebuzzygossip.com/click" class="btn-secondary">&#9989; Access Your Federal Benefits Now</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════ -->
+<section class="article-section testimonials-section">
+  <div class="container">
+    <h2>Verified Program Recipients — Real Homeowners, Real Results</h2>
+    <p>Over <strong>50,000 homeowners</strong> have already claimed their Home Equity Stimulus through this program in 2026. Here's what some of them are saying:</p>
+  </div>
+
+  <!-- Slider — full width, outside .container so cards bleed edge to edge -->
+  <div class="testimonial-slider-wrap">
+    <div class="testimonial-track" id="testimonialTrack">
+
+      <!-- ── Original cards ── -->
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I honestly didn't think I'd qualify for anything better — my credit isn't perfect and I've had some tough years. But I filled out the form and within 24 hours I had real options. We ended up saving $347 a month. That's our grocery budget."</p>
+        <div class="author">— Sandra M., Ohio &nbsp;|&nbsp; Saved $347/mo</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I was skeptical at first — I've seen plenty of these programs that don't deliver. But the process was fast, I wasn't pressured into anything, and I ended up with a rate almost 2 points lower. I wish I'd done this sooner."</p>
+        <div class="author">— David R., Texas &nbsp;|&nbsp; Rate dropped 1.8%</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"My mortgage was suffocating us. Two minutes to fill out the form and now we have $410 extra per month. My wife cried when we got the final paperwork. This was a game changer for our family."</p>
+        <div class="author">— Marcus &amp; Tina L., Georgia &nbsp;|&nbsp; Saved $410/mo</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"We were drowning in a 7.4% rate. After checking our options it took less than 3 weeks to close at 5.1%. Our monthly payment dropped by $388. Absolutely worth every minute."</p>
+        <div class="author">— Patricia &amp; Glen W., Florida &nbsp;|&nbsp; Saved $388/mo</div>
+      </div>
+
+      <!-- ── Duplicated cards for seamless infinite loop ── -->
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I honestly didn't think I'd qualify for anything better — my credit isn't perfect and I've had some tough years. But I filled out the form and within 24 hours I had real options. We ended up saving $347 a month. That's our grocery budget."</p>
+        <div class="author">— Sandra M., Ohio &nbsp;|&nbsp; Saved $347/mo</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"I was skeptical at first — I've seen plenty of these programs that don't deliver. But the process was fast, I wasn't pressured into anything, and I ended up with a rate almost 2 points lower. I wish I'd done this sooner."</p>
+        <div class="author">— David R., Texas &nbsp;|&nbsp; Rate dropped 1.8%</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"My mortgage was suffocating us. Two minutes to fill out the form and now we have $410 extra per month. My wife cried when we got the final paperwork. This was a game changer for our family."</p>
+        <div class="author">— Marcus &amp; Tina L., Georgia &nbsp;|&nbsp; Saved $410/mo</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="quote">"We were drowning in a 7.4% rate. After checking our options it took less than 3 weeks to close at 5.1%. Our monthly payment dropped by $388. Absolutely worth every minute."</p>
+        <div class="author">— Patricia &amp; Glen W., Florida &nbsp;|&nbsp; Saved $388/mo</div>
+      </div>
+
+    </div><!-- /testimonial-track -->
+  </div><!-- /testimonial-slider-wrap -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Click To Join Via The Official Gov. Portal Check Your $185,000 Eligibility Now</h2>
+    <p>
+      Funds are limited and being allocated right now. Every day you wait is a day someone else in your area claims the relief you may be entitled to. It costs nothing to check — and takes less than 2 minutes.
+    </p>
+    <a href="https://tracking.thebuzzygossip.com/click" class="btn-primary">&#9989; Access Your Federal Benefits Now</a>
+    <div style="margin-top:14px;">
+      <span style="font-family:'Open Sans',Arial,sans-serif;font-size:13px;color:#7090b8;">
+        &#128274; Secure &nbsp;&#183;&nbsp; Free &nbsp;&#183;&nbsp; NO Obligations &nbsp;&#183;&nbsp; 2 Minutes
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     DISCLAIMER / FOOTER
+════════════════════════════════════════ -->
+<footer class="disclaimer" id="disclaimer">
+  <div class="container">
+
+    <div class="footer-links" style="margin-bottom:14px;">
+      <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms</a>
+    </div>
+
+    <p class="footer-copyright">&copy; <span class="current-year"></span> | All Rights Reserved.</p>
+
+    <hr />
+
+    <p>
+      This website acts as an independent advertising publisher. This webpage is formatted as an advertorial and is brought to you.
+      An advertorial is an advertisement that is written in an editorial news format.
+      <strong>PLEASE BE AWARE THAT THIS IS AN ADVERTISEMENT AND NOT AN ACTUAL NEWS ARTICLE, BLOG, OR CONSUMER PROTECTION UPDATE.</strong>
+      It may receive paid compensation for clicks or sales produced from the content found on this webpage.
+      This compensation may affect which companies are displayed, the placement of advertisements, and their order of appearance.
+      Any information or price quotations listed may not be applicable in your location or if certain income requirements are not met.
+      Additionally, our advertisers may have additional qualification requirements.
+      Where you provide any information to us, such information shall be passed on to our third-party advertising partners.
+    </p>
+
+    <p>
+      Average Estimated savings is based on $417,000 loan amount at 5% with a 20% savings according to Freddie Mac.
+    </p>
+
+    <p>
+      <strong>
+        This page is an advertorial, and not an actual news article, blog or consumer protection update.
+      </strong>
+    </p>
+
+  </div>
+</footer>
+
+<script>
+  // Auto-fill current year in footer
+  document.querySelectorAll('.current-year').forEach(function(el) {
+    el.textContent = new Date().getFullYear();
+  });
+</script>
+</body>
+</html>
