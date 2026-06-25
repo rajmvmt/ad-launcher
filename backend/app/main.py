@@ -312,8 +312,21 @@ async def startup_event():
             conn.commit()
             print("✅ Added last_post_at column to tracked_pages")
 
+        # Helper: log unhandled exceptions from asyncio background tasks
+        import asyncio
+
+        def _log_task_exception(task, label="background task"):
+            """Callback that logs any unhandled exception from an asyncio Task."""
+            try:
+                exc = task.exception()
+                if exc is not None:
+                    print(f"⚠️  Unhandled exception in {label}: {exc}")
+            except (asyncio.CancelledError, asyncio.InvalidStateError):
+                pass
+
         # Auto-start Telegram bot if token is configured (env var OR DB)
         telegram_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+
         if not telegram_token:
             try:
                 db_token = conn.execute(text("SELECT value FROM app_settings WHERE key = 'telegram_bot_token'")).fetchone()
@@ -356,8 +369,14 @@ async def startup_event():
                                 pass
 
             # Only auto-start bot if not running locally (avoid conflicts with Railway production)
-            import asyncio
-            asyncio.create_task(_delayed_bot_start(telegram_token))
+            try:
+                _bot_task = asyncio.create_task(_delayed_bot_start(telegram_token))
+                _bot_task.add_done_callback(
+                    lambda t: _log_task_exception(t, "Telegram bot auto-start")
+                )
+            except Exception as _e:
+                print(f"⚠️  Failed to schedule Telegram bot auto-start: {_e}")
+
 
         # ── Auto-sync FB Pages every 24h ──────────────────────────────────
         async def _auto_sync_pages(interval_hours=24):
@@ -417,8 +436,13 @@ async def startup_event():
 
                 await _aio.sleep(interval_hours * 3600)
 
-        import asyncio
-        asyncio.create_task(_auto_sync_pages())
+        try:
+            _sync_task = asyncio.create_task(_auto_sync_pages())
+            _sync_task.add_done_callback(
+                lambda t: _log_task_exception(t, "FB pages auto-sync")
+            )
+        except Exception as _e:
+            print(f"⚠️  Failed to schedule FB pages auto-sync: {_e}")
 
         # ── Auto-sync Domains → Persona Farm ─────────────────────────────
         # When domains exist without a persona, auto-create a placeholder persona
