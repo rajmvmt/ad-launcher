@@ -18,7 +18,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 500,
   },
   preview: {
-    allowedHosts: 'all',
+    allowedHosts: ['eloquent-smile-production-17e3.up.railway.app', '.up.railway.app'],
   },
   server: {
     allowedHosts: ['mvmt.scalewithroly.com', 'localhost', '127.0.0.1'],
