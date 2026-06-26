@@ -18,7 +18,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 500,
   },
   preview: {
-    allowedHosts: ['frontend-production-9f4d.up.railway.app'],
+    allowedHosts: 'all',
   },
   server: {
     allowedHosts: ['mvmt.scalewithroly.com', 'localhost', '127.0.0.1'],
