@@ -1,0 +1,3 @@
+[submodule "backend/playbooks/ads-framework"]
+	path = backend/playbooks/ads-framework
+	url = https://github.com/rajmvmt/ads-framework
