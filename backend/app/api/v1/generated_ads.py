@@ -235,55 +235,84 @@ async def generate_image(
     request: ImageGenerationRequest,
     current_user: User = Depends(require_permission("ads:write"))
 ):
-    """Generate ad images using fal.ai Nano Banana Pro or Google Imagen 4."""
+    """Generate ad images using Claude (copy/prompt) + Higgsfield (image)."""
+    from app.services.playbook_launch_service import generate_ad_content, load_playbook
+    from app.services import higgsfield_service
 
     images = []
-    use_fal = request.model == "nano-banana-pro" and settings.fal_enabled and fal_client
-    use_imagen = request.model == "imagen4" and settings.imagen_enabled and genai
 
-    # Fallback: if requested model unavailable, try the other
-    if not use_fal and not use_imagen:
-        if settings.fal_enabled and fal_client:
-            use_fal = True
-        elif settings.imagen_enabled and genai:
-            use_imagen = True
+    # Build offer context from request fields
+    product_name = request.product.get('name', '') if request.product else ''
+    product_desc = request.product.get('description', '') if request.product else ''
+    brand_name = request.brand.get('name', '') if request.brand else ''
+    offer_context = f"{product_name}: {product_desc}".strip(": ")
 
-    imagen_client = None
-    if use_imagen:
-        imagen_client = genai.Client(api_key=settings.GEMINI_API_KEY)
+    # Use custom prompt directly if provided, otherwise run through Claude + ads-framework
+    if request.customPrompt:
+        image_prompt = request.customPrompt
+        generated = {"headline": "", "primary_text": "", "cta": "LEARN_MORE", "image_prompt": image_prompt}
+    else:
+        try:
+            playbook_text = load_playbook("ads-framework") if (
+                (Path(__file__).resolve().parent.parent.parent / "playbooks" / "ads-framework.md").exists()
+            ) else ""
+        except Exception:
+            playbook_text = ""
 
-    provider = "fal.ai Nano Banana Pro" if use_fal else "Google Imagen 4" if use_imagen else "None"
+        try:
+            generated = generate_ad_content(
+                playbook_text=playbook_text,
+                competitor_intel="",
+                offer_context=offer_context,
+                brand_name=brand_name,
+                product_name=product_name,
+                track="image",
+            )
+        except Exception as e:
+            print(f"Claude generation failed: {e}")
+            generated = {
+                "headline": "",
+                "primary_text": "",
+                "cta": "LEARN_MORE",
+                "image_prompt": build_comprehensive_prompt(request),
+            }
+        image_prompt = generated.get("image_prompt") or build_comprehensive_prompt(request)
+
+    hf_model = generated.get("image_model", "higgsfield/soul-2.0")
+    if not hf_model.startswith("higgsfield/"):
+        hf_model = "higgsfield/soul-2.0"
+
     print(f"\n{'='*80}")
-    print(f"IMAGE GENERATION — {provider}")
-    print(f"Model requested: {request.model} | Count: {request.count} | Sizes: {len(request.imageSizes)}")
+    print(f"IMAGE GENERATION — Higgsfield ({hf_model})")
+    print(f"Count: {request.count} | Sizes: {len(request.imageSizes)}")
+    print(f"Prompt: {image_prompt[:120]}...")
     print(f"{'='*80}")
 
+    sizes = request.imageSizes if request.imageSizes else [{"width": 1080, "height": 1080, "name": "Square"}]
+
     for i in range(request.count):
-        for size in request.imageSizes:
+        for size in sizes:
             width = size.get('width', 1080)
             height = size.get('height', 1080)
             size_name = size.get('name', 'Square')
             aspect_ratio = size.get('aspectRatio') or get_aspect_ratio(width, height)
 
-            prompt = build_comprehensive_prompt(request)
-
             print(f"\n[{i+1}/{request.count}] {size_name} ({width}x{height})")
-            print(f"Prompt: {prompt[:120]}...")
 
             try:
                 loop = asyncio.get_event_loop()
-                if use_fal:
-                    image_url = await loop.run_in_executor(
-                        None, _generate_with_fal_sync, prompt, width, height, request.resolution
+                local_urls = await loop.run_in_executor(
+                    None,
+                    lambda: higgsfield_service.generate_image_sync(
+                        prompt=image_prompt,
+                        model=hf_model,
+                        aspect_ratio=aspect_ratio,
+                        num_images=1,
                     )
-                elif use_imagen and imagen_client:
-                    image_url = await loop.run_in_executor(
-                        None, _generate_with_imagen_sync, imagen_client, prompt, width, height, aspect_ratio
-                    )
-                else:
-                    image_url = f"https://placehold.co/{width}x{height}/png?text=No+AI+Key+Configured"
+                )
+                image_url = local_urls[0] if local_urls else f"https://placehold.co/{width}x{height}/png?text=No+Image"
             except Exception as e:
-                print(f"Generation failed: {e}")
+                print(f"Higgsfield generation failed: {e}")
                 import traceback
                 traceback.print_exc()
                 image_url = f"https://placehold.co/{width}x{height}/png?text=Generation+Error"
@@ -292,10 +321,13 @@ async def generate_image(
                 "url": image_url,
                 "size": size_name,
                 "dimensions": f"{width}x{height}",
-                "prompt": prompt
+                "prompt": image_prompt,
+                "headline": generated.get("headline", ""),
+                "primary_text": generated.get("primary_text", ""),
+                "cta": generated.get("cta", "LEARN_MORE"),
             })
 
-    return {"images": images}
+    return {"images": images, "generated_copy": generated}
 
 @router.get("/")
 def get_generated_ads(

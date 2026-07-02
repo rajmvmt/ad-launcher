@@ -14,7 +14,7 @@ router = APIRouter()
 
 CLAUDE_MODELS = {
     "haiku": "claude-haiku-4-5-20251001",
-    "sonnet": "claude-sonnet-4-5-20250929",
+    "sonnet": "claude-sonnet-4-6",
 }
 
 HEADLINE_PROMPT = """You are a 7-figure affiliate media buyer who writes Facebook ad headlines every single day. You spend $50k+/day on ads and you've split-tested thousands of headlines. You know what actually stops the scroll in 2024-2025 — not textbook copywriting theory, but real patterns that print money on Facebook right now.
