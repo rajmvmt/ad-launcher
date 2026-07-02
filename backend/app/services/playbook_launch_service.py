@@ -1,8 +1,8 @@
 """
 Playbook-driven ad launch service.
 
-Scrapes competitor URLs, loads a playbook, and uses Gemini to generate
-ad copy + image prompts — then hands off to Higgsfield + Facebook.
+Loads the ads-framework SKILL.md + relevant framework files, then uses Claude
+to generate ad copy + image prompts — then hands off to Higgsfield + Facebook.
 """
 import json
 import logging
@@ -18,6 +18,51 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 PLAYBOOK_DIR = Path(__file__).resolve().parent.parent.parent / "playbooks"
+ADS_FRAMEWORK_DIR = PLAYBOOK_DIR / "ads-framework"
+
+# Files loaded for every generation (core routing + voice)
+SKILL_CORE_FILES = [
+    "skills/hermes-ad-creation/SKILL.md",
+    "00-soul/TONE_VOICE_LIBRARY.md",
+    "00-soul/PERSONA_SYSTEM.md",
+    "01-frameworks/PRODUCT_INTAKE.md",
+    "01-frameworks/MECHANISM_ENGINEERING.md",
+    "02-hook-library/HOOK_LIBRARY.md",
+]
+
+# Extra files loaded for image track
+SKILL_IMAGE_FILES = [
+    "01-frameworks/IMAGE_FRAMEWORK.md",
+]
+
+# Extra files loaded for video track
+SKILL_VIDEO_FILES = [
+    "01-frameworks/VIDEO_FRAMEWORK.md",
+    "07-production/MASTER_PROMPTS_ASSEMBLY_LINE.md",
+]
+
+
+def _load_framework_file(relative_path: str) -> str:
+    """Load a single ads-framework file, return empty string if missing."""
+    path = ADS_FRAMEWORK_DIR / relative_path
+    if path.exists():
+        return path.read_text(encoding="utf-8")
+    logger.warning(f"Framework file not found: {path}")
+    return ""
+
+
+def load_ads_framework(track: str = "image") -> str:
+    """
+    Load the relevant ads-framework files for the given track.
+    Returns a combined string to inject as system context.
+    """
+    files = SKILL_CORE_FILES + (SKILL_IMAGE_FILES if track == "image" else SKILL_VIDEO_FILES)
+    sections = []
+    for rel_path in files:
+        content = _load_framework_file(rel_path)
+        if content:
+            sections.append(f"### FILE: {rel_path}\n{content}")
+    return "\n\n---\n\n".join(sections)
 
 
 def load_playbook(name: str) -> str:
@@ -94,51 +139,60 @@ def generate_ad_content(
     offer_context: str,
     brand_name: Optional[str] = None,
     product_name: Optional[str] = None,
+    track: str = "image",
 ) -> dict:
     """
-    Use Claude to generate headline, primary_text, and image_prompt
-    based on the playbook rules, competitor intel, and offer context.
+    Use Claude + ads-framework SKILL.md to generate headline, primary_text, and image_prompt.
 
     Returns: {"headline": str, "primary_text": str, "image_prompt": str,
               "image_model": str, "aspect_ratio": str, "cta": str}
     """
     client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
 
-    system_prompt = """You are an expert Facebook ad copywriter and creative director.
-You will be given:
-1. A PLAYBOOK with rules for writing copy and generating images
-2. COMPETITOR INTEL scraped from competitor ads/pages
-3. OFFER CONTEXT about the product/offer being advertised
+    framework_context = load_ads_framework(track=track)
 
-Your job: generate Facebook ad content following the playbook rules exactly.
+    system_prompt = f"""You are Hermes — an elite direct-response creative strategist for Meta/Facebook ecommerce ads.
 
-Output ONLY valid JSON with these fields:
-- "headline": short punchy headline (follow playbook length rules)
-- "primary_text": the ad body text (follow playbook tone and length rules)
-- "cta": call to action type (SHOP_NOW, LEARN_MORE, SIGN_UP, etc.)
-- "image_prompt": a detailed image generation prompt following the playbook Image Style section
-- "image_model": the Higgsfield model specified in the playbook (default: soul_2)
-- "aspect_ratio": from the playbook (default: 1:1)
+You have been given your full knowledge base below. Follow the SKILL.md routing table and execute Track 1 (Image Ads) for the product brief provided.
 
-Study the competitor intel to understand what angles and hooks work in this space,
-then create something BETTER using the playbook rules. Output raw JSON only, no markdown."""
+Key rules you must follow:
+- Never freestyle. Pull frameworks, hooks, and templates directly from the knowledge base.
+- Use The Constructed Authority, The Price Anchor, and Specificity rules from SKILL.md.
+- Text overlays must appear within 2 seconds. Use loaded words.
+- Output ONLY valid JSON — no markdown, no explanation.
 
-    user_prompt = f"""## PLAYBOOK
+JSON output fields:
+- "headline": short punchy headline using a hook from HOOK_LIBRARY.md
+- "primary_text": the ad body text (use the voice from TONE_VOICE_LIBRARY.md)
+- "cta": call to action (SHOP_NOW, LEARN_MORE, SIGN_UP, etc.)
+- "image_prompt": detailed Higgsfield image generation prompt following IMAGE_FRAMEWORK.md
+- "image_model": Higgsfield model (default: soul_2)
+- "aspect_ratio": 1:1 for feed, 9:16 for stories/reels
+- "angle": the core angle used (1-2 words)
+
+---
+
+## YOUR KNOWLEDGE BASE
+{framework_context}"""
+
+    user_prompt = f"""## PRODUCT BRIEF
+Brand: {brand_name or "Unknown"}
+Product: {product_name or "Unknown"}
+
+## OFFER CONTEXT
+{offer_context}
+
+## OPERATIONAL PLAYBOOK
 {playbook_text}
 
 ## COMPETITOR INTEL
 {competitor_intel if competitor_intel else "No competitor data available."}
 
-## OFFER CONTEXT
-{offer_context}
-{f"Brand: {brand_name}" if brand_name else ""}
-{f"Product: {product_name}" if product_name else ""}
-
-Generate the ad content JSON now."""
+Execute Track 1 (Image Ad). Generate the ad content JSON now."""
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=1024,
+        max_tokens=2048,
         system=system_prompt,
         messages=[{"role": "user", "content": user_prompt}],
     )
